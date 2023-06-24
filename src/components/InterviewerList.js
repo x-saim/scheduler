@@ -24,5 +24,3 @@ export default function InterviewerList({ interviewers, setInterviewer, intervie
     </section>
   )
 }
-
-//{() => setInterviewer(e.id)}

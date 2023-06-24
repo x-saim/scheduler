@@ -3,14 +3,14 @@ import 'components/InterviewerListItem.scss'
 import "components/Button.scss";
 import classNames from "classnames";
 
-export default function InterviewerListItem({ id, name, avatar, selected, setInterviewer }) {
+export default function InterviewerListItem({ name, avatar, selected, setInterviewer }) {
 
   const interviewer = classNames('interviewers__item', { 'interviewers__item--selected': selected })
 
   return (
     <li
       className={interviewer}
-      onClick={() => setInterviewer(id)}
+      onClick={setInterviewer}
     >
       <img
         className="interviewers__item-image"
