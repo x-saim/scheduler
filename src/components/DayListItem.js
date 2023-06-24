@@ -4,22 +4,22 @@ import 'components/DayListItem.scss'
 
 
 
-export default function DayListItem(props) {
+export default function DayListItem({ spots, selected, id, setDay, name }) {
   const dayClass = classNames('day-list__item', {
-    'day-list__item--selected': props.selected,
-    'day-list__item--full': (props.spots === 0)
+    'day-list__item--selected': selected,
+    'day-list__item--full': (spots === 0)
   })
 
-  const formatSpots = (props) => {
-    let str = props.spots === 1 ? `${props.spots} spot` : (props.spots === 0 ? `no spots` : `${props.spots} spots`);
+  const formatSpots = ({ spots }) => {
+    let str = spots === 1 ? `${spots} spot` : (spots === 0 ? `no spots` : `${spots} spots`);
     return str;
   }
 
   return (
     <li className={dayClass}
-      onClick={() => props.setDay(props.name)}>
-      <h2 className="text--regular">{props.name}</h2>
-      <h3 className="text--light">{formatSpots(props)} remaining</h3>
+      onClick={() => setDay(name)}>
+      <h2 className="text--regular">{name}</h2>
+      <h3 className="text--light">{formatSpots({ spots })} remaining</h3>
     </li >
   );
 }

@@ -9,7 +9,7 @@ export default function DayList({ days, day, setDay }) {
       name={e.name}
       spots={e.spots}
       selected={e.name === day}
-      setDay={setDay} />
+      setDay={() => setDay(e.name)} />
   })
 
   return (
