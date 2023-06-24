@@ -11,15 +11,8 @@ export default function DayListItem(props) {
   })
 
   const formatSpots = (props) => {
-    let str = `${props.spots} spots`;
-    if (props.spots === 1) {
-      str = `${props.spots} spot`
-    }
-    else if (props.spots === 0) {
-      str = `no spots`
-    }
-
-    return str
+    let str = props.spots === 1 ? `${props.spots} spot` : (props.spots === 0 ? `no spots` : `${props.spots} spots`);
+    return str;
   }
 
   return (
