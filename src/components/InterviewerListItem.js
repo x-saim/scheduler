@@ -1,4 +1,6 @@
 import React from "react";
+import 'components/InterviewerListItem.scss'
+import "components/Button.scss";
 
 export default function InterviewerListItem({ id, name, avatar, selected, setInterviewer }) {
   // const interviewer = {
