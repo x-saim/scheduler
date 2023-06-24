@@ -1,15 +1,15 @@
 import React from "react";
 import DayListItem from "./DayListItem";
 
-export default function DayList({ days, day, setDay }) {
+export default function DayList({ days, value, onChange }) {
 
-  const data = days.map((e) => {
+  const data = days.map((d) => {
     return <DayListItem
-      key={e.id}
-      name={e.name}
-      spots={e.spots}
-      selected={e.name === day}
-      setDay={() => setDay(e.name)} />
+      key={d.id}
+      name={d.name}
+      spots={d.spots}
+      selected={d.name === value}
+      setDay={onChange} />
   })
 
   return (
@@ -18,3 +18,5 @@ export default function DayList({ days, day, setDay }) {
     </ul>
   )
 }
+
+//() => setDay(e.name)
