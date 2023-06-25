@@ -26,7 +26,7 @@ export default function Form(props) {
           />
         </form>
         <InterviewerList
-        /* your code goes here */
+          interviewers={props.interviewers} value={props.interviewer}
         />
       </section>
       <section className="appointment__card-right">
