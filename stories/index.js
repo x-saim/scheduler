@@ -152,7 +152,7 @@ storiesOf("InterviewerList", module)
 
 
 //Appointment.js
-// Components: Header, Empty, Show, Confirm, Status, Form
+// Components: Header, Empty, Show, Confirm, Status, Form {Edit, Create}
 
 storiesOf("Appointment", module)
   .addParameters({

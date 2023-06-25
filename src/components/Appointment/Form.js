@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 
 export default function Form(props) {
+
+  //we need to keep track of two pieces of information: the student name from our input, and the selected interviewer.
+
+  const [student, setStudent] = useState(props.student || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
 
 
   return (
@@ -12,13 +18,11 @@ export default function Form(props) {
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
+            value={student}
             name="name"
             type="text"
             placeholder="Enter Student Name"
-          /*
-            This must be a controlled component
-            your code goes here
-          */
+            onChange={(event) => setStudent(event.target.value)}
           />
         </form>
         <InterviewerList
