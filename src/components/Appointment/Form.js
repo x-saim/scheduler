@@ -3,7 +3,7 @@ import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 
-export default function Form() {
+export default function Form(props) {
 
 
   return (
@@ -27,8 +27,10 @@ export default function Form() {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger {/* your code goes here */}>Cancel</Button>
-          <Button confirm {/* your code goes here */}>Save</Button>
+          {/* your code goes here */}
+          <Button danger >Cancel</Button>
+          {/* your code goes here */}
+          <Button confirm >Save</Button>
         </section>
       </section>
     </main>
