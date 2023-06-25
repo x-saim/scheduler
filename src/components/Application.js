@@ -65,10 +65,8 @@ export default function Application(props) {
 
   const [day, setDay] = useState("Monday");
 
-  const appointmentsArray = Object.entries(appointments);
-  console.log(appointmentsArray)
-  const appointment = appointmentsArray.map((a) => {
-    return <Appointment key={a[1].id} time={a[1].time} interview={a[1].interview} />
+  const appointment = Object.values(appointments).map((a) => {
+    return <Appointment key={a.id} time={a.time} interview={a.interview} />
   })
 
 
