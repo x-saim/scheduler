@@ -11,19 +11,27 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   const reset = function () {
-    setStudent("")
-    setInterviewer(null)
+    setStudent("");
+    setInterviewer(null);
   }
 
   const cancel = function () {
-    reset()
-    props.onCancel()
+    reset();
+    props.onCancel();
   }
+
+  const onFormSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Call the onSave function passed as a prop to handle saving the form data
+    props.onSave();
+  };
+
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={onFormSubmit}>
           <input
             className="appointment__create-input text--semi-bold"
             value={student}
