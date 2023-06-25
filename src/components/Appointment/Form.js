@@ -5,8 +5,6 @@ import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
 
-  //we need to keep track of two pieces of information: the student name from our input, and the selected interviewer.
-
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
