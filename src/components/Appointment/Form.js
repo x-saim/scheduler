@@ -20,18 +20,10 @@ export default function Form(props) {
     props.onCancel();
   }
 
-  const onFormSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    // Call the onSave function passed as a prop to handle saving the form data
-    props.onSave();
-  };
-
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off" onSubmit={onFormSubmit}>
+        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             value={student}
@@ -53,6 +45,6 @@ export default function Form(props) {
           <Button confirm onClick={props.onSave}>Save</Button>
         </section>
       </section>
-    </main>
+    </main >
   )
 }
