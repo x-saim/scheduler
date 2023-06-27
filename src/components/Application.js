@@ -58,6 +58,13 @@ export default function Application() {
     return <Appointment key={a.id} {...a} /> //Spreading every key in the appointment object to become props for a component
   })
 
+  //updates the state with the new day.
+  const setDay = day => setState({ ...state, day });
+
+  const setDays = (days) => {
+    setState({ ...state, days })
+  }
+
   useEffect(() => {
     Axios
       .get('http://localhost:8001/api/days')
