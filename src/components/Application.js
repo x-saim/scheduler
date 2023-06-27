@@ -3,47 +3,7 @@ import Axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-
-
-
-const appointments = {
-  "1": {
-    id: 1,
-    time: "12pm",
-  },
-  "2": {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  "3": {
-    id: 3,
-    time: "2pm",
-  },
-  "4": {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer: {
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  "5": {
-    id: 5,
-    time: "4pm",
-  }
-};
+import { getAppointmentsForDay } from "helpers/selectors";
 
 export default function Application() {
 
@@ -54,21 +14,34 @@ export default function Application() {
     appointments: {}
   });
 
-  const appointment = Object.values(appointments).map((a) => {
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  const appointment = dailyAppointments.map((a) => {
     return <Appointment key={a.id} {...a} /> //Spreading every key in the appointment object to become props for a component
   })
 
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
 
-  const setDays = (days) => {
-    setState({ ...state, days })
-  }
+  const api = {
+    getDays: 'http://localhost:8001/api/days',
+    getAppointments: 'http://localhost:8001/api/appointments',
+    getInterviewers: 'http://localhost:8001/api/interviewers',
+  };
 
   useEffect(() => {
-    Axios
-      .get('http://localhost:8001/api/days')
-      .then(response => setDays(response.data))
+
+    Promise.all([
+      Axios
+        .get(api.getDays),
+      Axios
+        .get(api.getAppointments)])
+      .then((all) => {
+        setState((prev) => ({
+          ...prev, days: all[0].data, appointments: all[1].data
+        }))
+      })
+
   }, [])
 
   return (
