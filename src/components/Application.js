@@ -47,8 +47,13 @@ const appointments = {
 
 export default function Application() {
 
-  const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    appointments: {}
+  });
+
   const appointment = Object.values(appointments).map((a) => {
     return <Appointment key={a.id} {...a} /> //Spreading every key in the appointment object to become props for a component
   })
@@ -72,8 +77,8 @@ export default function Application() {
         <nav className="sidebar__menu">
 
           <DayList
-            days={days}
-            value={day}
+            days={state.days}
+            value={state.day}
             onChange={setDay}
           />
 
