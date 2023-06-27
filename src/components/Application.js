@@ -16,20 +16,17 @@ export default function Application() {
     interviewers: {}
   });
 
-  /*
-  Interviewers = {
-  "1": {
-    "id": 1,
-    "name": "Sylvia Palmer",
-    "avatar": "https://i.imgur.com/LpaY82x.png"
-  }
-  }
-  */
-
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const appointment = dailyAppointments.map((a) => {
-    return <Appointment key={a.id} {...a} /> //Spreading every key in the appointment object to become props for a component
+  const schedule = dailyAppointments.map((a) => {
+    const interview = getInterview(state, a.interview);
+
+
+    return <Appointment
+      key={a.id}
+      id={a.id}
+      time={a.time}
+      interview={interview} /> //Spreading every key in the appointment object to become props for a component
   })
 
   //updates the state with the new day.
@@ -86,7 +83,7 @@ export default function Application() {
         />
       </section>
       <section className="schedule">
-        {appointment}
+        {schedule}
         <Appointment key={"last"} time={"5pm"} />
       </section>
 
