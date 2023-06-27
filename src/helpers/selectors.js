@@ -1,3 +1,11 @@
+/**
+ * Retrieves appointments for a specific day.
+ *
+ * @param {Object} state - The state object {day, days, appointment} containing appointment and day information.
+ * @param {string} day - The name of the day to retrieve appointments for.
+ * @returns {Array} - An array of appointments for the specified day.
+ */
+
 export function getAppointmentsForDay(state, day) {
   const arr = [];
 
