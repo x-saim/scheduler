@@ -31,6 +31,15 @@ export function getAppointmentsForDay(state, day) {
   return arr
 }
 
+/**
+ * Retrieves and transforms interview information.
+ *
+ * @param {Object} state - The state object containing interview and interviewer information.
+ * @param {Object} interview - The interview object.
+ * @param {string} interview.student - The name of the student being interviewed.
+ * @param {number} interview.interviewer - The ID of the interviewer.
+ * @returns {Object|null} - The interview information, or null if no interview is provided.
+ */
 export function getInterview(state, interview) {
 
   if (!interview) {
