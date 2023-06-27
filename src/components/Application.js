@@ -61,12 +61,12 @@ const appointments = {
   }
 };
 
-export default function Application(props) {
+export default function Application() {
 
   const [day, setDay] = useState("Monday");
 
   const appointment = Object.values(appointments).map((a) => {
-    return <Appointment key={a.id} {...a} />
+    return <Appointment key={a.id} {...a} /> //Spreading every key in the appointment object to become props for a component
   })
 
 
