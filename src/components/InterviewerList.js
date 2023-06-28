@@ -4,15 +4,21 @@ import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList({ interviewers, onChange, value }) {
 
-  const interviewerList = interviewers.map((i) => {
-    return <InterviewerListItem
-      key={i.id}
-      name={i.name}
-      avatar={i.avatar}
-      selected={value === i.id}
-      setInterviewer={() => onChange(i.id)}
-    />
-  })
+  let interviewerList;
+  const arrayCheck = (interviewers) => {
+    if (interviewers) {
+      interviewerList = interviewers.map((i) => {
+        return <InterviewerListItem
+          key={i.id}
+          name={i.name}
+          avatar={i.avatar}
+          selected={value === i.id}
+          setInterviewer={() => onChange(i.id)}
+        />
+      })
+    }
+    return interviewerList
+  }
 
   return (
     <section className="interviewers">
