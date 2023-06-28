@@ -70,7 +70,7 @@ export function getInterviewersForDay(state, day) {
       for (const element of e.interviewers) {
         for (const key in state.interviewers) {
           if (Number(key) === element) {
-            arr.push(state.appointments[key])
+            arr.push(state.interviewers[key])
           }
 
         }
