@@ -11,12 +11,10 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 
 export default function Appointment({ time, interview, interviewers }) {
-  //console.log(interviewers)
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
 
-  //console.log(`index.js -- ${interviewers}`)
   return (
     <article className="appointment">
       <Header time={time} />

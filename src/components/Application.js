@@ -6,8 +6,6 @@ import Appointment from "./Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application() {
-
-
   //state object
   const [state, setState] = useState({
     day: "Monday",
