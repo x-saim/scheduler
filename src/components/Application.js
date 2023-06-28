@@ -17,9 +17,8 @@ export default function Application() {
   });
 
   const interviewers = getInterviewersForDay(state, state.day)
-
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  //console.log(dailyAppointments);
+
   const schedule = dailyAppointments.map((a) => {
     const interview = getInterview(state, a.interview);
 
@@ -27,12 +26,16 @@ export default function Application() {
       key={a.id}
       id={a.id}
       time={a.time}
-      interview={interview} /> //Spreading every key in the appointment object to become props for a component
+      interview={interview}
+      interviewers={interviewers}
+    />
   })
 
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
 
+
+  //api routes
   const api = {
     getDays: 'http://localhost:8001/api/days',
     getAppointments: 'http://localhost:8001/api/appointments',
@@ -57,6 +60,7 @@ export default function Application() {
       })
 
   }, [])
+
 
   return (
     <main className="layout">
@@ -85,7 +89,10 @@ export default function Application() {
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment key={"last"} time={"5pm"} interviewers={interviewers} />
+        <Appointment
+          key={"last"}
+          time={"5pm"}
+        />
       </section>
 
     </main>

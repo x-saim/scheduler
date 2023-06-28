@@ -16,7 +16,7 @@ export default function Appointment({ time, interview, interviewers }) {
     interview ? SHOW : EMPTY
   );
 
-
+  //console.log(`index.js -- ${interviewers}`)
   return (
     <article className="appointment">
       <Header time={time} />
