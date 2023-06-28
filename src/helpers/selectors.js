@@ -56,3 +56,28 @@ export function getInterview(state, interview) {
     }
   }
 }
+
+
+export function getInterviewersForDay(state, day) {
+  const arr = [];
+
+  for (const e of state.days) {
+    if (e.name === day) {
+      if (!e.interviewers) {
+        return [];
+      }
+
+      for (const element of e.interviewers) {
+        for (const key in state.interviewers) {
+          if (Number(key) === element) {
+            arr.push(state.appointments[key])
+          }
+
+        }
+      }
+
+    }
+  }
+
+  return arr
+}
