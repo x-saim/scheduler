@@ -20,8 +20,24 @@ export default function Application() {
   //change the local state when we book an interview
   function bookInterview(id, interview) {
     console.log(id, interview);
-  }
 
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    // console.log(appointment)
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    //console.log(appointments)
+    setState({
+      ...state,
+      appointments
+    });
+
+  }
+  //console.log(state)
 
 
   //setting up Appointment component props

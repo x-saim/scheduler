@@ -10,7 +10,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 
-export default function Appointment({ time, interview, interviewers }) {
+export default function Appointment({ time, interview, interviewers, bookInterview, id }) {
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
@@ -20,6 +20,12 @@ export default function Appointment({ time, interview, interviewers }) {
       student: name,
       interviewer
     };
+
+    // Call bookInterview with the appointment ID and interview object
+    bookInterview(id, interview);
+
+    // Transition to SHOW mode
+    transition(SHOW);
   }
 
   return (
@@ -32,7 +38,7 @@ export default function Appointment({ time, interview, interviewers }) {
           interviewer={interview.interviewer}
         />
       )}
-      {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} save={save} />}
+      {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}
 
 
     </article>
