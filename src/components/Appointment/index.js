@@ -17,7 +17,7 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 
-export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview, appointments }) {
+export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview }) {
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
@@ -42,6 +42,23 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
     }
   }
 
+  async function cancel(id) {
+
+    interview = null;
+
+    try {
+      transition(SAVING)
+
+      await cancelInterview(id, interview);
+
+      transition(EMPTY);
+
+    } catch (error) {
+      console.log(error);// Handle error
+    }
+
+  }
+
   return (
     <article className="appointment">
       <Header time={time} />
@@ -50,7 +67,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
-          onDelete={() => cancelInterview(id, appointments)}
+          onDelete={() => cancel(id, interview)}
         />
       )}
       {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}

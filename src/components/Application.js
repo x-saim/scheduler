@@ -31,10 +31,6 @@ export default function Application() {
       [id]: appointment
     };
     //console.log(appointments)
-    // setState({
-    //   ...state,
-    //   appointments
-    // });
 
     Axios
       .put(`http://localhost:8001/api/appointments/${id}`, {
@@ -53,15 +49,40 @@ export default function Application() {
   //console.log(state)
 
 
-  function cancelInterview(id, appointments) {
-    // for (const appointment in appointments) {
-    //   if (Number(appointment) === id) {
-    //     appointments[appointment]["interview"] = null;
-    //   }
-    // }
-    console.log(id, appointments);
+  function cancelInterview(id, interview) {
+    console.log(`successfully cancelled interview: id#${id}, new interview obj:${interview}`);
+    // const appointment = {
+    //   ...state.appointments[id],
+    //   interview: { ...interview }
+    // };
+
+    // const appointments = {
+    //   ...state.appointments,
+    //   [id]: appointment
+    // };
+
+
+
+    // Axios
+    //   .put(`http://localhost:8001/api/appointments/${id}`, {
+    //     interview
+    //   })
+    //   .then(response => {
+    //     console.log(response)
+    //   })
+    //   .then(setState({
+    //     ...state,
+    //     appointments
+    //   }))
+
 
   }
+
+
+  //     appointments[appointment]["interview"] = null;
+  //   }
+  // }
+  //console.log(id, appointments);
 
   //setting up Appointment component props
   const schedule = dailyAppointments.map((a) => {
