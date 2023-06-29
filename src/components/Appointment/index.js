@@ -15,17 +15,23 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
     interview ? SHOW : EMPTY
   );
 
-  function save(name, interviewer) {
+  async function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
 
     // Call bookInterview with the appointment ID and interview object
-    bookInterview(id, interview);
+    try {
+      //waiting for the asynchronous PUT request to complete
+      await bookInterview(id, interview);
 
-    // Transition to SHOW mode
-    transition(SHOW);
+      // Transition to SHOW mode
+      transition(SHOW);
+    }
+    catch (error) {
+      console.log(error);// Handle error
+    }
   }
 
   return (

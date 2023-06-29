@@ -31,10 +31,23 @@ export default function Application() {
       [id]: appointment
     };
     //console.log(appointments)
-    setState({
-      ...state,
-      appointments
-    });
+    // setState({
+    //   ...state,
+    //   appointments
+    // });
+
+    Axios
+      .put(`http://localhost:8001/api/appointments/${id}`, {
+        interview
+      })
+      .then(response => {
+        console.log(response)
+
+      })
+      .then(setState({
+        ...state,
+        appointments
+      }))
 
   }
   //console.log(state)
