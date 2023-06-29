@@ -1,14 +1,21 @@
 import React from "react";
 import 'components/Appointment/styles.scss'
+
+//helpers
+import useVisualMode from "hooks/useVisualMode";
+
+//sub components
 import Header from "./Header";
+import Form from "./Form";
 import Show from "./Show";
 import Empty from "./Empty";
-import useVisualMode from "hooks/useVisualMode";
-import Form from "./Form";
+import Status from "./Status";
 
+//Constants
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment({ time, interview, interviewers, bookInterview, id }) {
   const { mode, transition, back } = useVisualMode(
@@ -23,6 +30,8 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
 
     // Call bookInterview with the appointment ID and interview object
     try {
+
+      transition(SAVING);
       //waiting for the asynchronous PUT request to complete
       await bookInterview(id, interview);
 
@@ -45,6 +54,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         />
       )}
       {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}
+      {mode === SAVING && <Status message={`Booking interview...`} />}
 
 
     </article>
