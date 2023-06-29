@@ -15,6 +15,13 @@ export default function Appointment({ time, interview, interviewers }) {
     interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+  }
+
   return (
     <article className="appointment">
       <Header time={time} />
@@ -25,7 +32,7 @@ export default function Appointment({ time, interview, interviewers }) {
           interviewer={interview.interviewer}
         />
       )}
-      {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} />}
+      {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} save={save} />}
 
 
     </article>

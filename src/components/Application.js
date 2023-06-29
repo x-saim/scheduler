@@ -17,6 +17,14 @@ export default function Application() {
   const interviewers = getInterviewersForDay(state, state.day)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
+  //change the local state when we book an interview
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
+
+
+  //setting up Appointment component props
   const schedule = dailyAppointments.map((a) => {
     const interview = getInterview(state, a.interview);
 
@@ -26,11 +34,13 @@ export default function Application() {
       time={a.time}
       interview={interview}
       interviewers={interviewers}
+      bookInterview={bookInterview}
     />
   })
 
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
+
 
 
   //api routes
