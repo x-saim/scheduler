@@ -17,7 +17,7 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 
-export default function Appointment({ time, interview, interviewers, bookInterview, id }) {
+export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview, appointments }) {
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
@@ -30,8 +30,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
 
     // Call bookInterview with the appointment ID and interview object
     try {
-
-      transition(SAVING);
+      transition(SAVING)
       //waiting for the asynchronous PUT request to complete
       await bookInterview(id, interview);
 
@@ -51,6 +50,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
+          onDelete={() => cancelInterview(id, appointments)}
         />
       )}
       {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}

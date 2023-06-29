@@ -53,6 +53,16 @@ export default function Application() {
   //console.log(state)
 
 
+  function cancelInterview(id, appointments) {
+    // for (const appointment in appointments) {
+    //   if (Number(appointment) === id) {
+    //     appointments[appointment]["interview"] = null;
+    //   }
+    // }
+    console.log(id, appointments);
+
+  }
+
   //setting up Appointment component props
   const schedule = dailyAppointments.map((a) => {
     const interview = getInterview(state, a.interview);
@@ -64,6 +74,8 @@ export default function Application() {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
+      appointments={state.appointments}
     />
   })
 
