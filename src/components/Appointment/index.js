@@ -18,6 +18,8 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const DELETE = "DELETE";
+const EDIT = "EDIT";
+
 
 export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview }) {
   const { mode, transition, back } = useVisualMode(
@@ -51,14 +53,13 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
   async function cancel(id) {
 
     try {
-      //transition(CONFIRM);
-
+      // Use the transition function to update the mode to "DELETE"
       transition(DELETE)
 
       await cancelInterview(id);
       setTimeout(() => {
         transition(EMPTY);
-      }, 1000); // Delay the transition to EMPTY mode by 500 milliseconds
+      }, 1000); // Delay the transition to EMPTY mode by 1000 milliseconds/1second
 
     } catch (error) {
       console.log(error);// Handle error
@@ -75,6 +76,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
+          onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
         />
       )}
@@ -93,7 +95,14 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
           onConfirm={() => cancel(id)} />}
 
       {mode === DELETE && <Status message={"Deleting"} />}
-
+      {mode === EDIT &&
+        <Form
+          interviewers={interviewers}
+          name={interview.student}
+          interviewer={interview.interviewer.id}
+          onSave={save}
+          onCancel={() => transition(SHOW)}
+        />}
     </article>
   )
 }
