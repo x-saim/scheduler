@@ -17,30 +17,35 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
+const DELETE = "DELETE";
 
 export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview }) {
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
 
-  async function save(name, interviewer) {
+  const save = async (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
 
-    // Call bookInterview with the appointment ID and interview object
-    try {
-      transition(SAVING)
-      //waiting for the asynchronous PUT request to complete
-      await bookInterview(id, interview);
+    // Use the transition function to update the mode to "SAVING"
+    transition(SAVING)
 
-      // Transition to SHOW mode
-      transition(SHOW);
+    //waiting for the asynchronous PUT request to complete
+    try {
+      await bookInterview(id, interview);
+      // // Transition to SHOW mode after saving
+      setTimeout(() => {
+        transition(SHOW);
+      }, 1000); // Delay the transition to SHOW mode by 1000 milliseconds/1second
     }
+
     catch (error) {
-      console.log(error);// Handle error
+      console.log(error); // Handle error
     }
+
   }
 
   async function cancel(id) {
@@ -48,11 +53,12 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
     try {
       //transition(CONFIRM);
 
-      transition(SAVING)
+      transition(DELETE)
 
-      cancelInterview(id);
-
-      transition(EMPTY);
+      await cancelInterview(id);
+      setTimeout(() => {
+        transition(EMPTY);
+      }, 1000); // Delay the transition to EMPTY mode by 500 milliseconds
 
     } catch (error) {
       console.log(error);// Handle error
@@ -85,6 +91,8 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
           message={'Are you sure you want to delete?'}
           onCancel={() => transition(CREATE)}
           onConfirm={() => cancel(id)} />}
+
+      {mode === DELETE && <Status message={"Deleting"} />}
 
     </article>
   )

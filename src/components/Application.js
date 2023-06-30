@@ -19,18 +19,14 @@ export default function Application() {
 
   //change the local state when we book an interview
   function bookInterview(id, interview) {
-    console.log(id, interview);
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-    // console.log(appointment)
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-    //console.log(appointments)
 
     Axios
       .put(`http://localhost:8001/api/appointments/${id}`, {
@@ -46,7 +42,7 @@ export default function Application() {
       }))
 
   }
-  //console.log(state)
+
 
 
   function cancelInterview(id) {
@@ -66,11 +62,10 @@ export default function Application() {
         console.log(response)
       })
       // Update the client state with the new appointments
-      .then(setState(
-        {
-          ...state,
-          appointments: updatedAppointments
-        }))
+      .then(setState(prevState => ({
+        ...prevState,
+        appointments: updatedAppointments
+      })))
   }
 
   //setting up Appointment component props
