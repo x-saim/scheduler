@@ -47,7 +47,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
     try {
       transition(SAVING)
 
-      await cancelInterview(id, interview);
+      await cancelInterview(id);
 
       transition(EMPTY);
 

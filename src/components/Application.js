@@ -50,7 +50,7 @@ export default function Application() {
 
 
   function cancelInterview(id) {
-    console.log(state.appointments)
+
     // Create a new state object with updated appointments
     const updatedAppointments = {
       ...state.appointments,
@@ -59,49 +59,19 @@ export default function Application() {
         interview: null //assigns updated value to interview key.
       }
     }
-    console.log(updatedAppointments)
 
-    // Update the state with the new appointments
-    setState(
-      {
-        ...state,
-        appointments: updatedAppointments
-      });
+    Axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(response => {
+        console.log(response)
+      })
+      // Update the client state with the new appointments
+      .then(setState(
+        {
+          ...state,
+          appointments: updatedAppointments
+        }))
   }
-
-
-
-  // const appointment = {
-  //   ...state.appointments[id],
-  //   interview: { ...interview }
-  // };
-
-  // const appointments = {
-  //   ...state.appointments,
-  //   [id]: appointment
-  // };
-
-
-
-  // Axios
-  //   .put(`http://localhost:8001/api/appointments/${id}`, {
-  //     interview
-  //   })
-  //   .then(response => {
-  //     console.log(response)
-  //   })
-  //   .then(setState({
-  //     ...state,
-  //     appointments
-  //   }))
-
-
-
-
-  //     appointments[appointment]["interview"] = null;
-  //   }
-  // }
-  //console.log(id, appointments);
 
   //setting up Appointment component props
   const schedule = dailyAppointments.map((a) => {
