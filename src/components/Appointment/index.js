@@ -44,8 +44,6 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
 
   async function cancel(id) {
 
-    interview = null;
-
     try {
       transition(SAVING)
 
@@ -67,7 +65,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
-          onDelete={() => cancel(id, interview)}
+          onDelete={() => cancel(id)}
         />
       )}
       {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}

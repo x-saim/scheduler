@@ -49,34 +49,53 @@ export default function Application() {
   //console.log(state)
 
 
-  function cancelInterview(id, interview) {
-    console.log(`successfully cancelled interview: id#${id}, new interview obj:${interview}`);
-    // const appointment = {
-    //   ...state.appointments[id],
-    //   interview: { ...interview }
-    // };
+  function cancelInterview(id) {
+    console.log(state.appointments)
+    // Create a new state object with updated appointments
+    const updatedAppointments = {
+      ...state.appointments,
+      [id]: {
+        ...state.appointments[id], //shallow copies id, time, interview keys.
+        interview: null //assigns updated value to interview key.
+      }
+    }
+    console.log(updatedAppointments)
 
-    // const appointments = {
-    //   ...state.appointments,
-    //   [id]: appointment
-    // };
-
-
-
-    // Axios
-    //   .put(`http://localhost:8001/api/appointments/${id}`, {
-    //     interview
-    //   })
-    //   .then(response => {
-    //     console.log(response)
-    //   })
-    //   .then(setState({
-    //     ...state,
-    //     appointments
-    //   }))
-
-
+    // Update the state with the new appointments
+    setState(
+      {
+        ...state,
+        appointments: updatedAppointments
+      });
   }
+
+
+
+  // const appointment = {
+  //   ...state.appointments[id],
+  //   interview: { ...interview }
+  // };
+
+  // const appointments = {
+  //   ...state.appointments,
+  //   [id]: appointment
+  // };
+
+
+
+  // Axios
+  //   .put(`http://localhost:8001/api/appointments/${id}`, {
+  //     interview
+  //   })
+  //   .then(response => {
+  //     console.log(response)
+  //   })
+  //   .then(setState({
+  //     ...state,
+  //     appointments
+  //   }))
+
+
 
 
   //     appointments[appointment]["interview"] = null;
