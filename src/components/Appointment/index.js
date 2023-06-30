@@ -10,12 +10,13 @@ import Form from "./Form";
 import Show from "./Show";
 import Empty from "./Empty";
 import Status from "./Status";
-
+import Confirm from "./Confirm";
 //Constants
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const CONFIRM = "CONFIRM";
 
 export default function Appointment({ time, interview, interviewers, bookInterview, id, cancelInterview }) {
   const { mode, transition, back } = useVisualMode(
@@ -45,9 +46,11 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
   async function cancel(id) {
 
     try {
+      //transition(CONFIRM);
+
       transition(SAVING)
 
-      await cancelInterview(id);
+      cancelInterview(id);
 
       transition(EMPTY);
 
@@ -60,17 +63,28 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
   return (
     <article className="appointment">
       <Header time={time} />
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === EMPTY &&
+        <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
-          onDelete={() => cancel(id)}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
-      {mode === CREATE && <Form interviewers={interviewers} onCancel={() => back(EMPTY)} onSave={save} />}
-      {mode === SAVING && <Status message={`Booking interview...`} />}
-
+      {mode === CREATE &&
+        <Form
+          interviewers={interviewers}
+          onCancel={() => back(EMPTY)}
+          onSave={save} />}
+      {mode === SAVING &&
+        <Status
+          message={`Booking interview...`} />}
+      {mode === CONFIRM &&
+        <Confirm
+          message={'Are you sure you want to delete?'}
+          onCancel={() => transition(CREATE)}
+          onConfirm={() => cancel(id)} />}
 
     </article>
   )
