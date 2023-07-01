@@ -16,10 +16,6 @@ export default function Application(props) {
     updateSpots
   } = useApplicationData();
 
-  console.log(state)
-  //updateSpots();
-
-
   const interviewers = getInterviewersForDay(state, state.day)
 
   //setting up Appointment component props

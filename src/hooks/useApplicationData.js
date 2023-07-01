@@ -9,18 +9,14 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {}
   })
-  //state.days[element]['appointments'].includes(id)
+
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
 
   //update spots remaining
   const updateSpots = (id, update) => {
-    console.log(state)
-
     for (const element of state.days) {
-      console.log(element);
-      if (element && element.appointments && element.appointments.includes(id)
-      )
+      if (element.appointments.includes(id))
         if (update === "add") {
           element.spots -= 1;
         } else if (update === "remove") {
@@ -46,10 +42,6 @@ export default function useApplicationData() {
       .put(`http://localhost:8001/api/appointments/${id}`, {
         interview
       })
-      .then(response => {
-        console.log(response)
-
-      })
       .then(setState({
         ...state,
         appointments
@@ -71,9 +63,6 @@ export default function useApplicationData() {
 
     Axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then(response => {
-        console.log(response)
-      })
       // Update the client state with the new appointments
       .then(setState(prevState => ({
         ...prevState,
