@@ -9,10 +9,26 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {}
   })
-
-
+  //state.days[element]['appointments'].includes(id)
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
+
+  //update spots remaining
+  const updateSpots = (id, update) => {
+    console.log(state)
+
+    for (const element of state.days) {
+      console.log(element);
+      if (element && element.appointments && element.appointments.includes(id)
+      )
+        if (update === "add") {
+          element.spots -= 1;
+        } else if (update === "remove") {
+          element.spots += 1;
+        }
+    }
+    return state;
+  }
 
 
   //change the local state when we book an interview
@@ -38,6 +54,7 @@ export default function useApplicationData() {
         ...state,
         appointments
       }))
+      .then(updateSpots(id, "add"));
 
   }
 
@@ -62,6 +79,7 @@ export default function useApplicationData() {
         ...prevState,
         appointments: updatedAppointments
       })))
+      .then(updateSpots(id, "remove"));
   }
 
   //api routes
@@ -95,6 +113,7 @@ export default function useApplicationData() {
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
+    updateSpots
   };
 }

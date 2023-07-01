@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
@@ -13,8 +12,13 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
+    updateSpots
   } = useApplicationData();
+
+  console.log(state)
+  //updateSpots();
+
 
   const interviewers = getInterviewersForDay(state, state.day)
 
