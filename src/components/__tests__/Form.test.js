@@ -8,15 +8,23 @@ afterEach(cleanup);
 
 
 describe("Form", () => {
+  const interviewers = [
+    {
+      id: 1,
+      student: "Sylvia Palmer",
+      avatar: "https://i.imgur.com/LpaY82x.png"
+    }
+  ];
+
   it("renders without crashing", () => {
-    render(<Appointment />);
+    render(<Form />);
   });
 
-  it("does something it is supposed to do", () => {
-    // ...
+  it("renders without student name if not provided", () => {
+    expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
   });
 
-  it("does something else it is supposed to do", () => {
-    // ...
+  it("renders with initial student name", () => {
+    expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
 });
