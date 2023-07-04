@@ -29,10 +29,11 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             onChange={(event) => setStudent(event.target.value)}
+            data-testid={"student-name-input"}
           />
         </form>
         <InterviewerList
-          interviewers={props.interviewers.toString()}
+          interviewers={props.interviewers}
           value={interviewer}
           onChange={setInterviewer}
         />
