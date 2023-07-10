@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, fireEvent, queryByText } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
@@ -58,20 +58,16 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it("calls onSave function when the name and interviewer is defined", () => {
+  it("submits the name entered by the user", () => {
     const onSave = jest.fn();
+    const { getByText, getByPlaceholderText } = render(
+      <Form interviewers={interviewers} onSave={onSave} interviewer={1} />
+    );
 
-    const { queryByText } = render(<Form
-      interviewers={interviewers}
-      name={"Lydia Miller-Jones"}
-      interviewer={interviewers[0].id}
-      onSave={onSave}
-    />)
+    const input = getByPlaceholderText("Enter Student Name");
 
-    fireEvent.click(queryByText("Save"));
-
-    expect(queryByText(/student name cannot be blank/i)).toBeNull();
-    expect(queryByText(/please select an interviewer/i)).toBeNull();
+    fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
+    fireEvent.click(getByText("Save"));
 
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
