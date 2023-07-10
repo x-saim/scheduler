@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -19,22 +19,12 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview, and reduces the spots remaining for the first day by 1", async () => {
+    const { container } = render(<Application />);
 
-    //Render the Application component.
-    const { getByText, getByPlaceholderText } = render(<Application />)
 
-    //Wait until the text 'Archie Cohen' is displayed
-    await waitForElement(() => getByText("Archie Cohen"))
-
-    //Click the "Add" button on the first empty appointment
-    fireEvent.click(getByText("Add"));
-
-    //Enter the name "lydia Miller-Jones" into the input with the placeholder "Enter Student Name"
-
-    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-      target: { value: "Lydia Miller-Jones" }
-    });
-
+    //wait until after the element containing "Archie Cohen" renders.
+    await waitForElement(() => getByText(container, 'Archie Cohen'));
+    console.log(prettyDOM(container));
 
   });
 
