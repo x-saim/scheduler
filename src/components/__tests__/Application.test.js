@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText, debug, queryByText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByPlaceholderText, getByAltText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -19,7 +19,7 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview, and reduces the spots remaining for the first day by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     //wait until after the element containing "Archie Cohen" renders.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
@@ -53,13 +53,7 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
 
-    await waitForElement(() => getByText(day, "no spots remaining"));
-
-    console.log(prettyDOM(day));
-    debug();
-
-    // console.log(prettyDOM(appointment));
-
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
 
 })
