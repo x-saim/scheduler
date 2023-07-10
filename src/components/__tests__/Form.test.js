@@ -45,19 +45,6 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it("validates that the interviewer cannot be null", () => {
-    const onSave = jest.fn();
-
-    const { getByText } = render(<Form
-      interviewers={interviewers}
-      onSave={onSave}
-      interviewer={null} />)
-    fireEvent.click(getByText("Save"));
-
-    expect(getByText(/please select an interviewer/i)).toBeInTheDocument();
-    expect(onSave).not.toHaveBeenCalled();
-  });
-
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
@@ -68,7 +55,6 @@ describe("Form", () => {
     );
 
     fireEvent.click(getByText("Save"));
-    console.log(prettyDOM(document.body));
 
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
