@@ -21,25 +21,19 @@ describe("Application", () => {
   it("loads data, books an interview, and reduces the spots remaining for the first day by 1", async () => {
     const { container } = render(<Application />);
 
-
     //wait until after the element containing "Archie Cohen" renders.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
-    console.log(prettyDOM(container));
-    const appointments = getAllByTestId(container, "appointment")
 
     //returned value is an array of DOM nodes
-    console.log(prettyDOM(appointments));
-
+    const appointments = getAllByTestId(container, "appointment")
     const appointment = appointments[0];
-
-    console.log(prettyDOM(appointment));
 
     //To test that the saving works we need to click the add button, change the student name input and click the save button.
 
     fireEvent.click(getByAltText(appointment, "Add"));
 
     //changing input to student name
-    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
     });
 
@@ -48,6 +42,8 @@ describe("Application", () => {
 
     //clicking save button
     fireEvent.click(getByText(appointment, "Save"));
+
+    console.log(prettyDOM(appointment));
 
   });
 
