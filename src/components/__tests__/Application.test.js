@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText, debug } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText, debug, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -46,7 +46,17 @@ describe("Application", () => {
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
-    //debug();
+
+    //Find the specific day node that contains the text "Monday"
+    const day = getAllByTestId(container, "day").find(day =>
+      //we want to have the value null returned if it doesn't find the node so we use queryByText instead of getBy
+      queryByText(day, "Monday")
+    );
+
+    await waitForElement(() => getByText(day, "no spots remaining"));
+
+    console.log(prettyDOM(day));
+    debug();
 
     // console.log(prettyDOM(appointment));
 
