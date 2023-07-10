@@ -57,29 +57,29 @@ export default {
   get: jest.fn(url => {
 
     switch (url) {
-      case "/api/days":
+      case "http://localhost:8001/api/days":
         /* Resolve days data */
         return Promise.resolve({
           status: 200,
           statusText: "OK",
           data: fixtures.days
-        })
+        });
 
-      case "/api/appointments":
+      case "http://localhost:8001/api/appointments":
         /* Resolve appointments data */
         return Promise.resolve({
           status: 200,
           statusText: "OK",
           data: fixtures.appointments
-        })
+        });
 
-      case "/api/interviewers":
+      case "http://localhost:8001/api/interviewers":
         /* Resolve interviewers data */
         return Promise.resolve({
           status: 200,
           statusText: "OK",
           data: fixtures.interviewers
-        })
+        });
 
       default:
         break;

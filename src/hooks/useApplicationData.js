@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
-
 export default function useApplicationData() {
 
   const [state, setState] = useState({
