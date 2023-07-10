@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText, debug } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -19,7 +19,7 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview, and reduces the spots remaining for the first day by 1", async () => {
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
 
     //wait until after the element containing "Archie Cohen" renders.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
@@ -43,7 +43,10 @@ describe("Application", () => {
     //clicking save button
     fireEvent.click(getByText(appointment, "Save"));
 
-    console.log(prettyDOM(appointment));
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    //debug();
+
+    // console.log(prettyDOM(appointment));
 
   });
 

@@ -95,7 +95,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
           onSave={save} />}
       {mode === SAVING &&
         <Status
-          message={`Booking interview...`} />}
+          message={`Saving`} />}
       {mode === CONFIRM &&
         <Confirm
           message={'Are you sure you want to delete?'}
