@@ -19,19 +19,19 @@ export default function Form(props) {
     props.onCancel();
   }
 
-  function validate() {
-    if (props.name === "" || props.name === null) {
+  const validate = function () {
+    if (student === "") {
       setError("Student name cannot be blank");
       return;
     }
 
-    if (props.interviewer === null) {
+    if (interviewer === null) {
       setError("Please select an interviewer");
       return;
     }
 
     setError("");
-    props.onSave(props.name, interviewer);
+    props.onSave(student, interviewer);
   }
 
   return (

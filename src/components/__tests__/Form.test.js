@@ -63,10 +63,12 @@ describe("Form", () => {
     const { getByText, getByPlaceholderText, queryByText } = render(
       <Form interviewers={interviewers}
         onSave={onSave}
-        interviewer={1} />
+        interviewer={1}
+      />
     );
 
     fireEvent.click(getByText("Save"));
+    console.log(prettyDOM(document.body));
 
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
