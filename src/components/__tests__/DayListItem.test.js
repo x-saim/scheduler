@@ -7,18 +7,12 @@ afterEach(cleanup);
 
 describe("DayListItem", () => {
 
-  // it("renders without crashing", () => {
-  //   render(<DayListItem />);
-  // });
-
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
-
-    //returned value is an array of DOM nodes
 
     // 3. Click the "Delete" button on the first booked appointment. If not find, returns null.
     const appointments = getAllByTestId(container, "appointment")
@@ -47,25 +41,33 @@ describe("DayListItem", () => {
     );
 
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-
-
-    debug()
-
   });
+
+
+
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", () => {
+
+    //1. Render the Application.
+
+    const { container, debug } = render(<Application />);
+
+    // 2. Wait until the text "Archie Cohen" is displayed.
+
+    // 3. Click the "Edit" button on the first booked appointment. If not find, returns null.
+
+    //4. Check that the form is in SHOW Mode and/or the student name is inputted.
+
+    // 5. Click the "Confirm" button on the CONFIRM view.
+
+    //6. Select a new interviewer
+
+    //7. Click the "Save" button on the CREATE view.
+
+    //8. COnfirm that the "Saving" transiton appears.
+
+    //9. Confirm the view is back to the SHOW view.
+
+
+
+  })
 })
-
-
-// it("renders 'no spots remaining' when there are 0 spots", () => {
-//   const { getByText } = render(<DayListItem name="Monday" spots={0} />);
-//   expect(getByText("no spots remaining")).toBeInTheDocument();
-// });
-
-// it("renders '1 spot remaining' when there is 1 spot", () => {
-//   const { getByText } = render(<DayListItem name="Monday" spots={1} />);
-//   expect(getByText("1 spot remaining")).toBeInTheDocument();
-// });
-
-// it("renders '2 spots remaining' when there are 2 spots", () => {
-//   const { getByText } = render(<DayListItem name="Monday" spots={2} />);
-//   expect(getByText("2 spots remaining")).toBeInTheDocument();
-// });
