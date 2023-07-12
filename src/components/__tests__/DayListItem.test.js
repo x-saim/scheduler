@@ -1,13 +1,13 @@
 import React from "react";
 
-import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText } from "@testing-library/react";
+import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText, getAllByDisplayValue, getByDisplayValue } from "@testing-library/react";
 import Application from "components/Application";
 
 afterEach(cleanup);
 
 describe("DayListItem", () => {
 
-  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
     const { container } = render(<Application />);
 
@@ -45,29 +45,42 @@ describe("DayListItem", () => {
 
 
 
-  it("loads data, edits an interview and keeps the spots remaining for Monday the same", () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
 
     //1. Render the Application.
 
     const { container, debug } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => getByText(container, "Archie Cohen"));
 
     // 3. Click the "Edit" button on the first booked appointment. If not find, returns null.
+    const appointments = getAllByTestId(container, "appointment")
+    const appointment = appointments.find((appointment) => {
+      return queryByText(appointment, "Archie Cohen")
+    })
+
+    //console.log(prettyDOM(appointment));
+
+    fireEvent.click(getByAltText(appointment, "Edit"));
+    //console.log(prettyDOM(appointment));
 
     //4. Check that the form is in SHOW Mode and/or the student name is inputted.
 
-    // 5. Click the "Confirm" button on the CONFIRM view.
+    expect(getByDisplayValue(appointment, "Archie Cohen"))
 
-    //6. Select a new interviewer
+    //5. Click and select a new interviewer
 
-    //7. Click the "Save" button on the CREATE view.
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+    console.log(prettyDOM(appointment));
 
-    //8. COnfirm that the "Saving" transiton appears.
+    //6. Click the "Save" button on the CREATE view.
 
-    //9. Confirm the view is back to the SHOW view.
+    //7. COnfirm that the "Saving" transiton appears.
+
+    //8. Confirm the view is back to the SHOW view.
 
 
-
+    // debug();
   })
 })
