@@ -113,7 +113,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
         />}
 
       {mode === ERROR_DELETE && (
-        <Error message="Error deleting appointment" onClose={() => back()} />
+        <Error message="Error: Failed to delete" onClose={() => back()} />
       )}
 
       {mode === ERROR_SAVE && (
