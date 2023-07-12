@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText } from "@testing-library/react";
+import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText } from "@testing-library/react";
 import Application from "components/Application";
 
 afterEach(cleanup);
@@ -19,14 +19,13 @@ describe("DayListItem", () => {
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     //returned value is an array of DOM nodes
+
+    // 3. Click the "Delete" button on the first booked appointment. If not find, returns null.
     const appointments = getAllByTestId(container, "appointment")
-    const appointment = appointments[1];
+    const appointment = appointments.find((appointment) => {
+      return queryByText(appointment, "Archie Cohen")
+    })
 
-
-    console.log(prettyDOM(appointment))
-    debug()
-
-    // 3. Click the "Delete" button on the first booked appointment.
     fireEvent.click(getByAltText(appointment, "Delete"));
 
     //4. Check that the confirmation message is shown.
@@ -48,6 +47,9 @@ describe("DayListItem", () => {
     );
 
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+
+
+    debug()
 
   });
 })
