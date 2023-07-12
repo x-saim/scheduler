@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText, getAllByDisplayValue, getByDisplayValue, queryByAttribute } from "@testing-library/react";
+import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText, getByDisplayValue, queryByAttribute } from "@testing-library/react";
 import Application from "components/Application";
 
 afterEach(cleanup);
@@ -49,7 +49,7 @@ describe("DayListItem", () => {
 
     //1. Render the Application.
 
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -69,7 +69,6 @@ describe("DayListItem", () => {
     //5. Click and select a new interviewer
 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
-    // console.log(prettyDOM(appointment));
 
     //6. Click the "Save" button on the CREATE view.
     fireEvent.click(getByText(appointment, "Save"));
@@ -77,9 +76,18 @@ describe("DayListItem", () => {
 
     //7. COnfirm that the "Saving" transiton appears.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
-
     //8. Confirm the view is back to the SHOW view.
     await waitForElement(() => getByText(appointment, "Archie Cohen"));
     expect(queryByAttribute("class", container, "appointment__card appointment__card--show")).toBeInTheDocument();;
+
+    //9. Check the the spots remaining 
+    //Find the specific day node that contains the text "Monday"
+    const day = getAllByTestId(container, "day").find(day =>
+      //we want to have the value null returned if it doesn't find the node so we use queryByText instead of getBy
+      queryByText(day, "Monday")
+    );
+
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   })
+
 })

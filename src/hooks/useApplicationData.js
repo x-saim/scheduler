@@ -12,13 +12,12 @@ export default function useApplicationData() {
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
 
-  const api = {
-    getDays: '/api/days',
-    getAppointments: '/api/appointments',
-    getInterviewers: '/api/interviewers',
-  };
-
   useEffect(() => {
+    const api = {
+      getDays: '/api/days',
+      getAppointments: '/api/appointments',
+      getInterviewers: '/api/interviewers',
+    };
 
     Promise.all([
       Axios
