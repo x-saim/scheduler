@@ -54,6 +54,7 @@ const fixtures = {
 };
 
 export default {
+  defaults: { baseURL: "" },
   get: jest.fn(url => {
 
     switch (url) {
@@ -88,8 +89,8 @@ export default {
 
   put: jest.fn(url => {
 
-    //End point is using Appointment id #1
-    if (url === `http://localhost:8001/api/appointments/1`) {
+    //End point is using Appointment id #2
+    if (url === `http://localhost:8001/api/appointments/2`) {
       return Promise.resolve({
         status: 200,
         statusText: "No Content"

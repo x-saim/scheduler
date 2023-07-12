@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText, getAllByDisplayValue, getByDisplayValue } from "@testing-library/react";
+import { render, cleanup, prettyDOM, waitForElement, getByText, getAllByTestId, fireEvent, getByAltText, queryByText, getAllByDisplayValue, getByDisplayValue, queryByAttribute } from "@testing-library/react";
 import Application from "components/Application";
 
 afterEach(cleanup);
@@ -49,7 +49,7 @@ describe("DayListItem", () => {
 
     //1. Render the Application.
 
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -60,10 +60,7 @@ describe("DayListItem", () => {
       return queryByText(appointment, "Archie Cohen")
     })
 
-    //console.log(prettyDOM(appointment));
-
     fireEvent.click(getByAltText(appointment, "Edit"));
-    //console.log(prettyDOM(appointment));
 
     //4. Check that the form is in SHOW Mode and/or the student name is inputted.
 
@@ -72,15 +69,17 @@ describe("DayListItem", () => {
     //5. Click and select a new interviewer
 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
-    console.log(prettyDOM(appointment));
+    // console.log(prettyDOM(appointment));
 
     //6. Click the "Save" button on the CREATE view.
+    fireEvent.click(getByText(appointment, "Save"));
+    // console.log(prettyDOM(appointment));
 
     //7. COnfirm that the "Saving" transiton appears.
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
     //8. Confirm the view is back to the SHOW view.
-
-
-    // debug();
+    await waitForElement(() => getByText(appointment, "Archie Cohen"));
+    expect(queryByAttribute("class", container, "appointment__card appointment__card--show")).toBeInTheDocument();;
   })
 })
