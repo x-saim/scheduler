@@ -12,6 +12,31 @@ export default function useApplicationData() {
   //updates the state with the new day.
   const setDay = day => setState({ ...state, day });
 
+  const api = {
+    getDays: '/api/days',
+    getAppointments: '/api/appointments',
+    getInterviewers: '/api/interviewers',
+  };
+
+  useEffect(() => {
+
+    Promise.all([
+      Axios
+        .get(api.getDays),
+      Axios
+        .get(api.getAppointments),
+      Axios.get(api.getInterviewers)])
+      .then((all) => {
+        setState((prev) => ({
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data
+        }))
+      })
+
+  }, [])
+
   //update spots remaining
   const updateSpots = (id, update) => {
     for (const element of state.days) {
@@ -38,7 +63,7 @@ export default function useApplicationData() {
     };
 
     Axios
-      .put(`http://localhost:8001/api/appointments/${id}`, {
+      .put(`/api/appointments/${id}`, {
         interview
       })
       .then(setState({
@@ -61,7 +86,7 @@ export default function useApplicationData() {
     }
 
     Axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       // Update the client state with the new appointments
       .then(setState(prevState => ({
         ...prevState,
@@ -69,33 +94,6 @@ export default function useApplicationData() {
       })))
       .then(updateSpots(id, "remove"));
   }
-
-  //api routes
-  const api = {
-    getDays: 'http://localhost:8001/api/days',
-    getAppointments: 'http://localhost:8001/api/appointments',
-    getInterviewers: 'http://localhost:8001/api/interviewers',
-  };
-
-  useEffect(() => {
-
-    Promise.all([
-      Axios
-        .get(api.getDays),
-      Axios
-        .get(api.getAppointments),
-      Axios.get(api.getInterviewers)])
-      .then((all) => {
-        setState((prev) => ({
-          ...prev,
-          days: all[0].data,
-          appointments: all[1].data,
-          interviewers: all[2].data
-        }))
-      })
-
-  }, [])
-
 
   return {
     state,

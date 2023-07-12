@@ -58,7 +58,7 @@ export default {
   get: jest.fn(url => {
 
     switch (url) {
-      case "http://localhost:8001/api/days":
+      case "/api/days":
         /* Resolve days data */
         return Promise.resolve({
           status: 200,
@@ -66,7 +66,7 @@ export default {
           data: fixtures.days
         });
 
-      case "http://localhost:8001/api/appointments":
+      case "/api/appointments":
         /* Resolve appointments data */
         return Promise.resolve({
           status: 200,
@@ -74,7 +74,7 @@ export default {
           data: fixtures.appointments
         });
 
-      case "http://localhost:8001/api/interviewers":
+      case "/api/interviewers":
         /* Resolve interviewers data */
         return Promise.resolve({
           status: 200,
@@ -87,27 +87,18 @@ export default {
     }
   }),
 
-  put: jest.fn(url => {
-
-    //End point is using Appointment id #2
-    if (url === `http://localhost:8001/api/appointments/2`) {
-      return Promise.resolve({
-        status: 200,
-        statusText: "No Content"
-      })
-    }
-
+  put: jest.fn((url, interview) => {
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    })
   }),
 
-  //End point is using Appointment id #2
   delete: jest.fn(url => {
 
-    if (url === `http://localhost:8001/api/appointments/2`) {
-      return Promise.resolve({
-        status: 200,
-        statusText: "No Content"
-      })
-    }
-
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    })
   })
 }

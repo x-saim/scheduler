@@ -7,7 +7,7 @@ afterEach(cleanup);
 
 describe("DayListItem", () => {
 
-  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
     const { container } = render(<Application />);
 
