@@ -69,7 +69,11 @@ export default function useApplicationData() {
         ...state,
         appointments
       }))
-      .then(updateSpots(id, "add"));
+      .then(updateSpots(id, "add"))
+      .catch((error) => {
+        console.log(error)
+      }
+      )
 
   }
 
