@@ -37,21 +37,25 @@ export default function useApplicationData() {
   }, [])
 
   //update spots remaining
-  const updateSpots = (id, update) => {
-    for (const element of state.days) {
-      if (element.appointments.includes(id))
-        if (update === "add") {
-          element.spots -= 1;
-        } else if (update === "remove") {
-          element.spots += 1;
+  const updateSpots = (id, update, mode) => {
+    setState(prevState => {
+      const days = prevState.days.map(day => {
+        if (day.appointments.includes(id)) {
+          if (update === "add" && mode !== "EDIT") {
+            day.spots--;
+          } else if (update === "remove" && mode !== "EDIT") {
+            day.spots++;
+          }
         }
-    }
-    return state;
-  }
+        return day;
+      });
 
+      return { ...prevState, days };
+    });
+  };
 
   //change the local state when we book an interview
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, mode) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -69,10 +73,12 @@ export default function useApplicationData() {
         ...state,
         appointments
       }))
-      .then(updateSpots(id, "add"))
+      .then(() => {
+        updateSpots(id, "add", mode)
+      })
   }
 
-  function cancelInterview(id) {
+  function cancelInterview(id, mode) {
 
     // Create a new state object with updated appointments
     const updatedAppointments = {
@@ -90,7 +96,7 @@ export default function useApplicationData() {
         ...prevState,
         appointments: updatedAppointments
       })))
-      .then(updateSpots(id, "remove"));
+      .then(updateSpots(id, "remove", mode));
   }
 
   return {
