@@ -36,7 +36,12 @@ export default function useApplicationData() {
 
   }, [])
 
-  //update spots remaining
+  /**
+ * Updates the spots remaining for a specific appointment.
+ * @param {number} id - The ID of the appointment.
+ * @param {string} update - The type of update ("add" or "remove").
+ * @param {string} mode - The mode of the appointment ("CREATE" or "EDIT").
+ */
   const updateSpots = (id, update, mode) => {
     setState(prevState => {
       const days = prevState.days.map(day => {
@@ -54,7 +59,13 @@ export default function useApplicationData() {
     });
   };
 
-  //change the local state when we book an interview
+  /**
+  * Books an interview for a specific appointment.
+  * @param {number} id - The ID of the appointment.
+  * @param {Object} interview - The interview object containing student and interviewer details.
+  * @param {string} mode - The mode of the appointment ("CREATE", "EDIT").
+  * @returns {Promise} - A promise that resolves when the booking is completed.
+  */
   function bookInterview(id, interview, mode) {
     const appointment = {
       ...state.appointments[id],
@@ -78,6 +89,12 @@ export default function useApplicationData() {
       })
   }
 
+  /**
+ * Cancels an interview for a specific appointment.
+ * @param {number} id - The ID of the appointment.
+ * @param {string} mode - The mode of the appointment ("CREATE", "EDIT").
+ * @returns {Promise} - A promise that resolves when the cancellation is completed.
+ */
   function cancelInterview(id, mode) {
 
     // Create a new state object with updated appointments

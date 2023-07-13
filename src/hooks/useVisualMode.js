@@ -5,9 +5,13 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-  const transition = (newMode, replace = false) => {
-    /*using previous state value of history. Updates last element of updatedHistory to newMode by accessing the last index of updatedHistory array.Lastly, the updated updatedHistory array is returned from the callback function, which will be used by setHistory to update the state value of history.*/
 
+  /**
+ * Transitions to a new mode and updates the history.
+ * @param {string} newMode - The new mode to transition to.
+ * @param {boolean} [replace=false] - Flag indicating whether to replace the last mode in history.
+ */
+  const transition = (newMode, replace = false) => {
     if (replace) {
       setHistory((prevHistory) => {
         const updatedHistory = [...prevHistory];
@@ -20,7 +24,9 @@ export default function useVisualMode(initial) {
     setMode(newMode)
   }
 
-  //checks if the history array has more than one item. If it does, it creates a new updatedHistory array by excluding the last item using slice().
+  /**
+ * Navigates back to the previous mode in history.
+ */
   const back = () => {
     if (history.length > 1) {
       const updatedHistory = [...history];

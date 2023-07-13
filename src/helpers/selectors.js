@@ -58,6 +58,12 @@ export function getInterview(state, interview) {
 }
 
 
+/**
+ * Retrieves the interviewers for a specific day.
+ * @param {Object} state - The state object containing appointments, days, and interviewers.
+ * @param {string} day - The day for which to retrieve the interviewers.
+ * @returns {Array} - An array of interviewers for the specified day.
+ */
 export function getInterviewersForDay(state, day) {
   const arr = [];
 
