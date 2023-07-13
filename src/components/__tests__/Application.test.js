@@ -26,7 +26,7 @@ describe("Application", () => {
     //wait until after the element containing "Archie Cohen" renders.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
-    //returned value is an array of DOM nodes
+    //Returned value is an array of DOM nodes
     const appointments = getAllByTestId(container, "appointment")
     const appointment = appointments[0];
 
@@ -34,15 +34,15 @@ describe("Application", () => {
 
     fireEvent.click(getByAltText(appointment, "Add"));
 
-    //changing input to student name
+    //Changing input to student name
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
     });
 
-    //clicking interviewer
+    //Clicking interviewer
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
-    //clicking save button
+    //Clicking save button
     fireEvent.click(getByText(appointment, "Save"));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe("Application", () => {
 
     //1. Render the Application.
 
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -130,8 +130,6 @@ describe("Application", () => {
     await waitForElement(() => getByText(appointment, "Archie Cohen"));
     expect(queryByAttribute("class", container, "appointment__card appointment__card--show")).toBeInTheDocument();
 
-    //console.log(prettyDOM(appointment))
-
     //9. Check the the spots remaining 
     //Find the specific day node that contains the text "Monday"
     const day = getAllByTestId(container, "day").find(day =>
@@ -140,15 +138,13 @@ describe("Application", () => {
     );
 
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-
-    //debug();
   })
 
-  xit("shows the save error when failing to save an appointment", async () => {
+  it("shows the save error when failing to save an appointment", async () => {
 
     axios.put.mockRejectedValueOnce();
 
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     //wait until after the element containing "Archie Cohen" renders.
     await waitForElement(() => getByText(container, 'Archie Cohen'));
@@ -181,7 +177,7 @@ describe("Application", () => {
 
 
 
-  xit("shows the delete error when failing to delete an existing appointment", async () => {
+  it("shows the delete error when failing to delete an existing appointment", async () => {
 
     axios.delete.mockRejectedValueOnce();
     const { container } = render(<Application />);

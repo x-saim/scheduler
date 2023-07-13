@@ -36,18 +36,14 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
       interviewer
     };
 
-
-    // Determine the mode based on the current mode value
-
-    //const mode = mode === EDIT ? EDIT : CREATE;
-    console.log(mode);
     // Use the transition function to update the mode to "SAVING"
     transition(SAVING);
 
     //waiting for the asynchronous PUT request to complete
     try {
+      //pass mode from state to update depending on CREATE or EDIT mode.
       await bookInterview(id, interview, mode);
-      // // Transition to SHOW mode after saving
+      // Transition to SHOW mode after saving
       transition(SHOW);
     }
     catch (error) {
