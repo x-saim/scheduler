@@ -37,42 +37,33 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
     };
 
     // Use the transition function to update the mode to "SAVING"
-    transition(SAVING)
+    transition(SAVING);
 
     //waiting for the asynchronous PUT request to complete
     try {
       await bookInterview(id, interview);
       // // Transition to SHOW mode after saving
-      setTimeout(() => {
-        transition(SHOW);
-      }, 1000); // Delay the transition to SHOW mode by 1000 milliseconds/1second
+      transition(SHOW);
     }
     catch (error) {
       //When we transition to the ERROR_SAVE mode from the SAVING mode, we need to replace the SAVING mode in the history.
       transition(ERROR_SAVE, true);
-      console.log(error); // Handle error
     }
-
   }
 
   const cancel = async (id) => {
+    // Use the transition function to update the mode to "DELETE"
+    transition(DELETE, true);
 
     try {
-      // Use the transition function to update the mode to "DELETE"
-      transition(DELETE, true)
-
       await cancelInterview(id);
-      setTimeout(() => {
-        transition(EMPTY);
-      }, 1000); // Delay the transition to EMPTY mode by 1000 milliseconds/1second
-
+      transition(EMPTY);
     } catch (error) {
       //When we transition to the ERROR_DELETE mode from the DELETE mode, we need to replace the DELETE mode in the history.
       transition(ERROR_DELETE, true);
-      console.log(error);// Handle error
-    }
 
-  }
+    }
+  };
 
   return (
     <article className="appointment"
@@ -99,7 +90,7 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
       {mode === CONFIRM &&
         <Confirm
           message={'Are you sure you want to delete?'}
-          onCancel={() => transition(CREATE)}
+          onCancel={() => transition(SHOW)}
           onConfirm={() => cancel(id)} />}
 
       {mode === DELETE && <Status message={"Deleting"} />}

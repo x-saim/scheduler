@@ -61,7 +61,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    Axios
+    return Axios
       .put(`/api/appointments/${id}`, {
         interview
       })
@@ -70,11 +70,6 @@ export default function useApplicationData() {
         appointments
       }))
       .then(updateSpots(id, "add"))
-      .catch((error) => {
-        console.log(error)
-      }
-      )
-
   }
 
   function cancelInterview(id) {
@@ -88,7 +83,7 @@ export default function useApplicationData() {
       }
     }
 
-    Axios
+    return Axios
       .delete(`/api/appointments/${id}`)
       // Update the client state with the new appointments
       .then(setState(prevState => ({
