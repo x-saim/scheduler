@@ -34,21 +34,21 @@ describe("Appointment", () => {
   };
 
   // Test case: should book an interview
-  xit("should book an interview", () => {
+  it("should book an interview", () => {
     createAppointment(); // Create an appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones"); // Verify the presence of the student name
     cy.contains(".appointment__card--show", "Sylvia Palmer"); // Verify the presence of the interviewer name
   });
 
   // Test case: should edit an interview
-  xit("should edit an interview", () => {
+  it("should edit an interview", () => {
     editAppointment(); // Edit an existing appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones"); // Verify the updated student name
     cy.contains(".appointment__card--show", "Tori Malcolm"); // Verify the updated interviewer name
   });
 
   // Test case: should cancel an interview
-  xit("should cancel an interview", () => {
+  it("should cancel an interview", () => {
     cancelAppointment(); // Cancel an existing appointment
     cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist"); // Verify the absence of the canceled appointment
   });
@@ -71,9 +71,8 @@ describe("Appointment", () => {
   }
   )
 
-
   //Test Case: Testing close button on DELETE error handler.
-  xit("deletes an appointment and handles delete error", () => {
+  it("throws error on saving appointment, returns to SHOW mode when clicking close button", () => {
 
     //intercept and mock the response of a DELETE request
     cy.intercept("DELETE", "/api/appointments/*", {
