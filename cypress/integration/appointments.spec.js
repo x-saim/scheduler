@@ -66,7 +66,6 @@ describe("Appointment", () => {
     cy.contains(".appointment__card--error", "Error saving appointment").should("exist");
     cy.get("[alt='Close']").click();
 
-    cy.get(".appointment__card appointment__card--create")
     cy.get("[data-testid='student-name-input']").should("have.value", "") // Verify that the input field is empty
     cy.get(".interviewers__item").should("not.have.class", "interviewers__item--selected"); // Verify that no interviewer is selected
   }
