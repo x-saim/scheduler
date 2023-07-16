@@ -43,5 +43,12 @@
   "bugs": {
     "url": "https://github.com/x-saim/scheduler/issues"
   },
-  "homepage": "https://github.com/x-saim/scheduler#readme"
+  "homepage": "https://github.com/x-saim/scheduler#readme",
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ]
+  },
+  "proxy": "http://localhost:8001"
 }
