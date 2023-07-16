@@ -16,13 +16,17 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 ## Dev Dependencies
 - babel/core: ^7.4.3
+- storybook/addon-actions": "^5.0.10",
+- storybook/addon-backgrounds": "^5.0.10",
+- storybook/addon-links": "^5.0.10",
+- storybook/addons": "^5.0.10",
 - storybook/react: ^5.0.10
 - testing-library/jest-dom: ^4.0.0
 - testing-library/react: ^8.0.7
 - testing-library/react-hooks: ^8.0.1
 - babel-loader: 8.1.0
 - prop-types: ^15.8.1
-- react-test-renderer: ^16.14.0
+- react-test-renderer: ^16.9.0
 - sass: ^1.53.0
 
 ## Other Tools
