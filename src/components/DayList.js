@@ -18,5 +18,3 @@ export default function DayList({ days, value, onChange }) {
     </ul>
   )
 }
-
-//() => setDay(e.name)

@@ -24,7 +24,9 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 - prop-types: ^15.8.1
 - react-test-renderer: ^16.14.0
 - sass: ^1.53.0
-- cypress: 
+
+## Other Tools
+- cypress@9.7.0
 
 ## Demo
 
@@ -71,7 +73,7 @@ npm run storybook
 
 ## Running Cypress
 Ensure the API server is in test mode by running `npm run test:server`. Then execute the following to run cypress, from the main scheduler project directory.
- 
+
 ```sh
 npm run cypress
 ```
