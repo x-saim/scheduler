@@ -1,11 +1,7 @@
 {
   "name": "scheduler",
-  "version": "1.0.0",
-  "description": "## Description",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
@@ -31,18 +27,28 @@
     "sass": "^1.53.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public --ci",
+    "build-storybook": "build-storybook -s public",
+    "cypress": "cypress open -P ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/x-saim/scheduler.git"
+  "browserlist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "keywords": [],
   "author": "@x-saim",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/x-saim/scheduler/issues"
-  },
   "homepage": "https://github.com/x-saim/scheduler#readme",
   "jest": {
     "watchPathIgnorePatterns": [
