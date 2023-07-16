@@ -54,38 +54,37 @@ describe("Appointment", () => {
   });
 
 
-  //We need to make a decision if we also want to test the close buttons for the errors to make sure we return to the correct mode.
+  //Test Case: Testing close button on SAVE error handler.
+  it("throws error on saving appointment, returns to CREATE mode when clicking close button", () => {
+    cy.intercept("PUT", "/api/appointments/*", {
+      statusCode: 500,
+      body: { error: "Error saving appointment" },
+    });
+    createAppointment()
+    cy.contains("Saving").should("not.exist"); // Verify that the "Saving" indicator does not exist
+
+    cy.contains(".appointment__card--error", "Error saving appointment").should("exist");
+    cy.get("[alt='Close']").click();
+
+    cy.get(".appointment__card appointment__card--create")
+    cy.get("[data-testid='student-name-input']").should("have.value", "") // Verify that the input field is empty
+    cy.get(".interviewers__item").should("not.have.class", "interviewers__item--selected"); // Verify that no interviewer is selected
+  }
+  )
 
 
-  // it("should transition from CREATE view to EMPTY when clicking Cancel button", () => {
-  //   cy.get("[alt=Add]").first().click(); // Click the "Add" button
-  //   cy.get("[data-testid=student-name-input]").type("Lydia Miller-Jones"); // Enter the student name
-  //   cy.get('[alt="Sylvia Palmer"]').click(); // Select the interviewer
-  //   cy.contains("Cancel").click(); // Click the "Cancel" button
-  //   cy.get("[alt=Add]")
-  //     .first()
-  //     .should("exist")
-  // })
+  //Test Case: Testing close button on DELETE error handler.
+  xit("deletes an appointment and handles delete error", () => {
 
-  // it("should transition from CONFIRM view to SHOW when clicking Cancel button", () => {
-  //   cy.get(".appointment__card").trigger("mouseover"); // Hover over the appointment card
-  //   cy.get("[alt='Delete']").click({ force: true }); // Click the "Delete" button with forced action
-  //   cy.contains("Cancel").click(); // Click the "Cancel" button
-  //   cy.contains(".appointment__card--show", "Archie Cohen").should("exist");
-  // })
-
-  it("deletes an appointment and handles delete error", () => {
-
+    //intercept and mock the response of a DELETE request
     cy.intercept("DELETE", "/api/appointments/*", {
       statusCode: 500,
-      body: { error: "Failed to delete" },
+      body: { error: "Error: Failed to delete" },
     });
 
     cy.get(".appointment__card").trigger("mouseover");
     cy.get("[alt='Delete']").click({ force: true });
     cy.contains("Confirm").click();
-
-    // cy.contains("Deleting").should("exist");
 
     cy.contains("Deleting").should("not.exist"); // Verify that the "Deleting" indicator does not exist
 
