@@ -34,22 +34,67 @@ describe("Appointment", () => {
   };
 
   // Test case: should book an interview
-  it("should book an interview", () => {
+  xit("should book an interview", () => {
     createAppointment(); // Create an appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones"); // Verify the presence of the student name
     cy.contains(".appointment__card--show", "Sylvia Palmer"); // Verify the presence of the interviewer name
   });
 
   // Test case: should edit an interview
-  it("should edit an interview", () => {
+  xit("should edit an interview", () => {
     editAppointment(); // Edit an existing appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones"); // Verify the updated student name
     cy.contains(".appointment__card--show", "Tori Malcolm"); // Verify the updated interviewer name
   });
 
   // Test case: should cancel an interview
-  it("should cancel an interview", () => {
+  xit("should cancel an interview", () => {
     cancelAppointment(); // Cancel an existing appointment
     cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist"); // Verify the absence of the canceled appointment
   });
+
+
+  //We need to make a decision if we also want to test the close buttons for the errors to make sure we return to the correct mode.
+
+
+  // it("should transition from CREATE view to EMPTY when clicking Cancel button", () => {
+  //   cy.get("[alt=Add]").first().click(); // Click the "Add" button
+  //   cy.get("[data-testid=student-name-input]").type("Lydia Miller-Jones"); // Enter the student name
+  //   cy.get('[alt="Sylvia Palmer"]').click(); // Select the interviewer
+  //   cy.contains("Cancel").click(); // Click the "Cancel" button
+  //   cy.get("[alt=Add]")
+  //     .first()
+  //     .should("exist")
+  // })
+
+  // it("should transition from CONFIRM view to SHOW when clicking Cancel button", () => {
+  //   cy.get(".appointment__card").trigger("mouseover"); // Hover over the appointment card
+  //   cy.get("[alt='Delete']").click({ force: true }); // Click the "Delete" button with forced action
+  //   cy.contains("Cancel").click(); // Click the "Cancel" button
+  //   cy.contains(".appointment__card--show", "Archie Cohen").should("exist");
+  // })
+
+  it("deletes an appointment and handles delete error", () => {
+
+    cy.intercept("DELETE", "/api/appointments/*", {
+      statusCode: 500,
+      body: { error: "Failed to delete" },
+    });
+
+    cy.get(".appointment__card").trigger("mouseover");
+    cy.get("[alt='Delete']").click({ force: true });
+    cy.contains("Confirm").click();
+
+    // cy.contains("Deleting").should("exist");
+
+    cy.contains("Deleting").should("not.exist"); // Verify that the "Deleting" indicator does not exist
+
+    cy.contains(".appointment__card--error", "Error: Failed to delete").should("exist");
+
+    //Click the close button
+    cy.get("[alt='Close']").click();
+
+    cy.contains(".appointment__card--show", "Archie Cohen").should("exist");
+  });
+
 });

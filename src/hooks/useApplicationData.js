@@ -80,10 +80,12 @@ export default function useApplicationData() {
       .put(`/api/appointments/${id}`, {
         interview
       })
-      .then(setState({
-        ...state,
-        appointments
-      }))
+      .then(() => {
+        setState(prevState => ({
+          ...prevState,
+          appointments
+        }));
+      })
       .then(() => {
         updateSpots(id, "add", mode)
       })
@@ -109,10 +111,12 @@ export default function useApplicationData() {
     return Axios
       .delete(`/api/appointments/${id}`)
       // Update the client state with the new appointments
-      .then(setState(prevState => ({
-        ...prevState,
-        appointments: updatedAppointments
-      })))
+      .then(() => {
+        setState(prevState => ({
+          ...prevState,
+          appointments: updatedAppointments
+        }));
+      })
       .then(updateSpots(id, "remove", mode));
   }
 

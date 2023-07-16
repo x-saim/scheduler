@@ -101,16 +101,15 @@ export default function Appointment({ time, interview, interviewers, bookIntervi
           name={interview.student}
           interviewer={interview.interviewer.id}
           onSave={save}
-
           onCancel={() => transition(SHOW)}
         />}
 
       {mode === ERROR_DELETE && (
-        <Error message="Error: Failed to delete" onClose={() => back()} />
+        <Error message="Error: Failed to delete" onClose={back} />
       )}
 
       {mode === ERROR_SAVE && (
-        <Error message="Error saving appointment" onClose={() => back()} />
+        <Error message="Error saving appointment" onClose={back} />
       )}
 
 

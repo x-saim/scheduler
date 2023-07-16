@@ -200,6 +200,3 @@ describe("Application", () => {
     await waitForElement(() => getByText(appointment, "Error: Failed to delete"));
   })
 })
-
-
-//We need to make a decision if we also want to test the close buttons for the errors to make sure we return to the correct mode.
