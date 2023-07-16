@@ -39,6 +39,13 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 ### Deleting Interview
 ![Deleting Appointment](https://github.com/x-saim/scheduler/blob/master/docs/DeleteInterview.gif?raw=true)
 
+### Error Handling - Saving Appointment
+![Saving Error](https://github.com/x-saim/scheduler/blob/master/docs/SaveError.gif?raw=true)
+
+### Error Handling - Deleting Appointment
+![Deleting Error](https://github.com/x-saim/scheduler/blob/master/docs/SaveError.gif?raw=true)
+
+
 ## Setup
 
 Install dependencies with `npm install`.
