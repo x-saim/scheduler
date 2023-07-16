@@ -72,7 +72,7 @@ describe("Appointment", () => {
   )
 
   //Test Case: Testing close button on DELETE error handler.
-  it("throws error on saving appointment, returns to SHOW mode when clicking close button", () => {
+  it("throws error on deleting appointment, returns to SHOW mode when clicking close button", () => {
 
     //intercept and mock the response of a DELETE request
     cy.intercept("DELETE", "/api/appointments/*", {

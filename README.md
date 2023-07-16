@@ -52,50 +52,40 @@ To get started, please perform the following steps:
 2. Follow the guidelines outlined in the scheduler-api README file to install the necessary database.
 3. Launch the scheduler-api server by navigating to the cloned folder and executing the command `npm start`.
 
-## Running Webpack Development Server
+### Running Webpack Development Server
 
 ```sh
 npm start
 ```
 
-## Running API Server
+### Running API Server
 
 ```sh
 npm start
 ```
 
-## Running Jest Test Framework
+### Running Jest Test Framework
 
 ```sh
 npm test
 ```
 
-## Running Storybook Visual Testbed
+### Running Storybook Visual Testbed
 
 ```sh
 npm run storybook
 ```
 
-## Running Cypress
+### Running Cypress
 Ensure the API server is in test mode by running `npm run test:server`. Then execute the following to run cypress, from the main scheduler project directory.
 
 ```sh
 npm run cypress
 ```
 
-## Resetting Database
+### Resetting Database
 
 ```sh
 curl http://localhost:8001/api/debug/reset
 ```
 Alternatively, you can visit `http://localhost:8001/api/debug/reset` in your browser.
-
-## Get Started
-
-To ensure proper functionality, the Scheduler application relies on the scheduler-api database to be installed and operational concurrently.
-
-To get started, please perform the following steps:
-
-1. Fork and clone the scheduler-api server repository from this [location](https://github.com/lighthouse-labs/scheduler-api).
-2. Follow the guidelines outlined in the scheduler-api README file to install the necessary database.
-3. Launch the scheduler-api server by navigating to the cloned folder and executing the command `npm start`.
