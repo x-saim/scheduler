@@ -30,9 +30,14 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 ## Demo
 
-![Saving Appointment](image-url)
-![Editing Appointment](image-url)
-![Deleting Appointment](image-url)
+### Saving Interview
+![Saving Appointment](https://github.com/x-saim/scheduler/blob/master/docs/SaveInterview.gif?raw=true)
+
+### Editing Interview
+![Editing Appointment](https://github.com/x-saim/scheduler/blob/master/docs/EditInterview.gif?raw=true)
+
+### Deleting Interview
+![Deleting Appointment](https://github.com/x-saim/scheduler/blob/master/docs/DeleteInterview.gif?raw=true)
 
 ## Setup
 
