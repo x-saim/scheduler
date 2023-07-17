@@ -47,7 +47,7 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 ![Saving Error](https://github.com/x-saim/scheduler/blob/master/docs/SaveError.gif?raw=true)
 
 ### Error Handling - Deleting Appointment
-![Deleting Error](hhttps://github.com/x-saim/scheduler/blob/master/docs/DeleteError.gif?raw=true)
+![Deleting Error](https://github.com/x-saim/scheduler/blob/master/docs/DeleteError.gif?raw=true)
 
 
 ## Setup
